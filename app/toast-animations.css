@@ -1,0 +1,297 @@
+/* Custom toast animations for right-to-left slide effect */
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutToRight {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+/* Toast enter animation - matches reference: duration-300 slide-in-from-right-full */
+[data-sonner-toast][data-state="open"],
+[data-sonner-toast][data-state="visible"],
+[data-sonner-toast][data-state="queued"] {
+  animation: slideInFromRight 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards !important; /* duration-300 = 300ms = 0.3s */
+  transform: translateX(0) !important;
+}
+
+/* Toast exit animation */
+[data-sonner-toast][data-state="closed"] {
+  animation: slideOutToRight 0.2s cubic-bezier(0.4, 0, 1, 1) !important;
+  transform: translateX(100%) !important;
+}
+
+/* Ensure smooth transitions - override Sonner defaults */
+[data-sonner-toast] {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  transform-origin: right center !important;
+}
+
+/* Toast container positioning - matches reference: top-4 right-4 max-w-md */
+[data-sonner-toaster] {
+  position: fixed;
+  top: 16px; /* top-4 = 1rem = 16px */
+  right: 16px; /* right-4 = 1rem = 16px */
+  z-index: 9999;
+  max-width: 24rem; /* Reduced from 28rem for more compact toasts */
+  width: auto;
+}
+
+/* Individual toast styling - matches reference: rounded-lg shadow-lg border */
+[data-sonner-toast] {
+  margin: 0; /* No margins */
+  margin-bottom: 8px; /* Only bottom margin for spacing between toasts */
+  border-radius: 0.375rem; /* Slightly smaller radius for compact look */
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -2px rgb(0 0 0 / 0.05); /* shadow-lg */
+  border: 1px solid;
+  display: inline-flex; /* Shrink to content width */
+  align-items: center;
+  width: auto;
+  min-width: 0; /* Remove default min width */
+  max-width: fit-content;
+  height: auto; /* Fit to content */
+  padding: 0; /* No padding on toast itself */
+  transform: translateX(100%); /* Start off-screen to the right */
+}
+
+/* Toast content styling - matches reference: px-4 py-3 gap-3 - ultra compact size */
+[data-sonner-toast] [data-content] {
+  padding: 3px 4px; /* Absolute minimal padding - no extra space */
+  display: flex;
+  align-items: center; /* Center align for tighter vertical fit */
+  gap: 4px; /* Minimal gap between icon and text */
+  width: fit-content; /* Fit to content width */
+  margin: 0; /* No margins */
+}
+
+/* Toast message container - remove extra spacing, fit to content */
+[data-sonner-toast] [data-content] > div {
+  flex: 0 1 auto; /* Don't grow, shrink if needed, fit to content */
+  min-width: 0;
+  max-width: fit-content; /* Fit exactly to text width */
+  margin: 0;
+  padding: 0;
+}
+
+/* Remove any default spacing from Sonner */
+[data-sonner-toast] * {
+  box-sizing: border-box;
+}
+
+[data-sonner-toast] p,
+[data-sonner-toast] span,
+[data-sonner-toast] div {
+  margin: 0;
+  padding: 0;
+}
+
+/* Toast close button */
+[data-sonner-toast] {
+  position: relative;
+}
+
+/* Toast close button - inline, minimal like reference */
+[data-sonner-toast] [data-close-button] {
+  position: static;
+  margin-left: 8px;
+  padding: 0;
+  height: auto;
+  width: auto;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+  flex-shrink: 0;
+  color: currentColor;
+  background: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+[data-sonner-toast] [data-close-button] svg {
+  width: 12px;
+  height: 12px;
+}
+
+[data-sonner-toast] [data-close-button]:hover {
+  opacity: 1;
+  background: transparent;
+}
+
+.dark [data-sonner-toast] [data-close-button]:hover {
+  background: transparent;
+}
+
+/* Toast icon styling - matches reference: h-5 w-5 mt-0.5 - ultra compact size */
+[data-sonner-toast] [data-icon] {
+  margin-top: 0; /* No margin for tighter alignment */
+  flex-shrink: 0;
+  width: 16px; /* Smaller icon for more compact look */
+  height: 16px; /* Smaller icon for more compact look */
+}
+
+/* Toast title styling - matches reference: text-sm font-semibold - ultra compact */
+[data-sonner-toast] [data-title] {
+  font-weight: 600; /* font-semibold */
+  font-size: 12px; /* Smaller font for ultra compact look */
+  line-height: 1.2; /* Tighter line height */
+  margin: 0; /* No margins */
+  padding: 0; /* No padding */
+  display: block;
+}
+
+/* Toast description styling - matches reference: text-sm leading-relaxed - ultra compact */
+[data-sonner-toast] [data-description] {
+  font-size: 12px; /* Smaller font for ultra compact look */
+  line-height: 1.2; /* Tighter line height */
+  margin: 0; /* No margins */
+  padding: 0; /* No padding */
+  display: block;
+}
+
+/* Remove spacing between title and description */
+[data-sonner-toast] [data-title] + [data-description] {
+  margin-top: 0;
+}
+
+/* Success toast styling - Green theme (matching admin: bg-green-50 border-green-200 text-green-800) */
+[data-sonner-toast][data-type="success"] {
+  background-color: rgb(240 253 244); /* green-50 */
+  border-color: rgb(187 247 208); /* green-200 */
+  color: rgb(22 101 52); /* green-800 */
+}
+
+.dark [data-sonner-toast][data-type="success"] {
+  background-color: rgb(5 46 22); /* green-950 */
+  border-color: rgb(20 83 45); /* green-800 */
+  color: rgb(187 247 208); /* green-200 */
+}
+
+[data-sonner-toast][data-type="success"] [data-icon] {
+  color: rgb(34 197 94); /* green-600 */
+}
+
+.dark [data-sonner-toast][data-type="success"] [data-icon] {
+  color: rgb(74 222 128); /* green-400 */
+}
+
+/* Error toast styling - Red theme (matching admin: bg-red-50 border-red-200 text-red-800) */
+[data-sonner-toast][data-type="error"] {
+  background-color: rgb(254 242 242); /* red-50 */
+  border-color: rgb(254 202 202); /* red-200 */
+  color: rgb(153 27 27); /* red-800 */
+}
+
+.dark [data-sonner-toast][data-type="error"] {
+  background-color: rgb(69 10 10); /* red-950 */
+  border-color: rgb(127 29 29); /* red-800 */
+  color: rgb(254 202 202); /* red-200 */
+}
+
+[data-sonner-toast][data-type="error"] [data-icon] {
+  color: rgb(239 68 68); /* red-600 */
+}
+
+.dark [data-sonner-toast][data-type="error"] [data-icon] {
+  color: rgb(248 113 113); /* red-400 */
+}
+
+/* Loading toast styling - Blue theme (matching admin: bg-blue-50 border-blue-200 text-blue-800) */
+[data-sonner-toast][data-type="loading"] {
+  background-color: rgb(239 246 255); /* blue-50 */
+  border-color: rgb(191 219 254); /* blue-200 */
+  color: rgb(30 64 175); /* blue-800 */
+}
+
+.dark [data-sonner-toast][data-type="loading"] {
+  background-color: rgb(23 37 84); /* blue-950 */
+  border-color: rgb(30 58 138); /* blue-800 */
+  color: rgb(191 219 254); /* blue-200 */
+}
+
+[data-sonner-toast][data-type="loading"] [data-icon] {
+  color: rgb(59 130 246); /* blue-600 */
+  animation: spin 1s linear infinite;
+}
+
+.dark [data-sonner-toast][data-type="loading"] [data-icon] {
+  color: rgb(96 165 250); /* blue-400 */
+}
+
+/* Info toast styling - Blue theme (matching admin: bg-blue-50 border-blue-200 text-blue-800) */
+[data-sonner-toast][data-type="info"] {
+  background-color: rgb(239 246 255); /* blue-50 */
+  border-color: rgb(191 219 254); /* blue-200 */
+  color: rgb(30 64 175); /* blue-800 */
+}
+
+.dark [data-sonner-toast][data-type="info"] {
+  background-color: rgb(23 37 84); /* blue-950 */
+  border-color: rgb(30 58 138); /* blue-800 */
+  color: rgb(191 219 254); /* blue-200 */
+}
+
+[data-sonner-toast][data-type="info"] [data-icon] {
+  color: rgb(59 130 246); /* blue-600 */
+}
+
+.dark [data-sonner-toast][data-type="info"] [data-icon] {
+  color: rgb(96 165 250); /* blue-400 */
+}
+
+/* Warning toast styling - Yellow theme (matching admin: bg-yellow-50 border-yellow-200 text-yellow-800) */
+[data-sonner-toast][data-type="warning"] {
+  background-color: rgb(254 252 232); /* yellow-50 */
+  border-color: rgb(254 240 138); /* yellow-200 */
+  color: rgb(133 77 14); /* yellow-800 */
+}
+
+.dark [data-sonner-toast][data-type="warning"] {
+  background-color: rgb(66 32 6); /* yellow-950 */
+  border-color: rgb(113 63 18); /* yellow-800 */
+  color: rgb(254 240 138); /* yellow-200 */
+}
+
+[data-sonner-toast][data-type="warning"] [data-icon] {
+  color: rgb(234 179 8); /* yellow-600 */
+}
+
+.dark [data-sonner-toast][data-type="warning"] [data-icon] {
+  color: rgb(250 204 21); /* yellow-400 */
+}
+
+/* Default toast styling - Neutral theme */
+[data-sonner-toast]:not([data-type]) {
+  background: hsl(var(--background));
+  border: 1px solid hsl(var(--border));
+  color: hsl(var(--foreground));
+  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 10px 10px -5px rgb(0 0 0 / 0.04);
+}
+
+[data-sonner-toast]:not([data-type]) [data-icon] {
+  color: hsl(var(--primary));
+}
+
+/* Spinning animation for loading icon */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

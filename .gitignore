@@ -1,0 +1,27 @@
+# Dependencies
+node_modules/
+.npm
+
+# Next.js
+.next/
+out/
+.open-next/
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Build outputs
+dist/
+build/
+
+# Cloudflare
+.wrangler/
+
+# Misc
+.DS_Store
+*.pem
+.vercel
