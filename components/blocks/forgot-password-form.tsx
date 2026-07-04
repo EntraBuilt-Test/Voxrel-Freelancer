@@ -82,7 +82,7 @@ export function ForgotPasswordForm({
             <Card>
                 <CardHeader className="text-center">
                     <div className="flex justify-center mb-4">
-                        <img src="/kreativs-ai-logo.jpg" alt="KreativS AI Logo" className="w-16 h-16 object-contain" />
+                        <img src="/voxrel-logo.png" alt="Voxrel Logo" className="w-16 h-16 object-contain drop-shadow-[0_0_12px_rgba(20,184,166,0.4)]" />
                     </div>
                     <CardTitle className="text-xl">Forgot Password</CardTitle>
                     <CardDescription>
@@ -98,7 +98,7 @@ export function ForgotPasswordForm({
                                     <Input
                                         id="email"
                                         type="email"
-                                        placeholder="m@kreativ.com"
+                                        placeholder="m@voxrel.com"
                                         value={email}
                                         onChange={handleInputChange}
                                         disabled={isLoading}

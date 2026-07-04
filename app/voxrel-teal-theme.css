@@ -1,0 +1,83 @@
+/*
+  Voxrel Teal Theme (Freelancer)
+  Drop this file in alongside your existing globals.css and import it
+  AFTER your current styles, e.g. in app/layout.tsx:
+    import "./globals.css";
+    import "./voxrel-teal-theme.css";
+
+  This only adds new CSS variables, classes, and keyframes.
+  It does not touch any component logic, routing, or data fetching.
+*/
+
+:root {
+  --teal-bg: #061414;
+  --teal-surface: #0a1f1f;
+  --teal-surface-elevated: #102b2a;
+  --teal-border: #163938;
+
+  --teal-primary: #14b8a6;
+  --teal-cyan: #22d3ee;
+  --teal-mint: #5eead4;
+
+  --teal-text-primary: #e6fdf8;
+  --teal-text-secondary: #7fbdb5;
+  --teal-text-muted: #4d7c74;
+
+  --teal-gradient: linear-gradient(
+    135deg,
+    var(--teal-primary) 0%,
+    var(--teal-cyan) 100%
+  );
+
+  --teal-glow: 0 0 24px rgba(20, 184, 166, 0.35);
+
+  --font-display: "Space Grotesk", var(--font-sans, sans-serif);
+  --font-body: "Inter", var(--font-sans, sans-serif);
+  --font-data: "JetBrains Mono", var(--font-mono, monospace);
+}
+
+.teal-shell {
+  background: var(--teal-bg);
+  color: var(--teal-text-primary);
+  font-family: var(--font-body);
+  min-height: 100vh;
+}
+
+.teal-card-glow {
+  position: relative;
+  background: var(--teal-surface);
+  border-radius: 14px;
+  padding: 1.25rem;
+}
+
+.teal-card-glow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+  padding: 1px;
+  background: var(--teal-gradient);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+}
+
+.teal-card-glow:hover::before {
+  opacity: 1;
+}
+
+.teal-card-glow:hover {
+  box-shadow: var(--teal-glow);
+}
+
+.teal-brand-mark {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 22px;
+  background: var(--teal-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
